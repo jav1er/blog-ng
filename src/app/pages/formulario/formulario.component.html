@@ -1,0 +1,54 @@
+<app-slider [name]="'Bienvenido a formulario'"></app-slider>
+
+<div class="center">
+  <section id="content">
+    <form class="mid-form" [formGroup]="userForm" (ngSubmit)="validate()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input formControlName="name" type="text" />
+        <small *ngIf=""> El nombre no es valido</small>
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input formControlName="lastname" type="text" />
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Biografia</label>
+        <textarea formControlName="bio"></textarea>
+        <ol *ngIf="userForm.get('bio').errors">
+          <li *ngIf="userForm.get('bio').errors?.validateDollar">
+            (validando el $)
+          </li>
+          <li *ngIf="userForm.get('bio').errors?.validateNumber">
+            (debe iniciar por un numero)
+          </li>
+          <li *ngIf="userForm.get('bio').errors?.minlength">
+            (debe tener 4 caracteres)
+          </li>
+          <li *ngIf="userForm.get('bio').errors?.required">
+            (debe ingresar un valor)
+          </li>
+        </ol>
+      </div>
+
+      <div class="form-group radibuttons">
+        <input type="radio" value="hombre" /> Hombre
+        <input type="radio" value="mujer" /> Mujer
+        <input type="radio" value="otro" /> Otro
+      </div>
+
+      <div class="clearfix"></div>
+
+      <input
+        type="submit"
+        value="Enviar"
+        class="btn"
+        [ngClass]="userForm.invalid ? 'btn-danger' : 'btn-success'"
+        [disabled]="userForm.invalid"
+      />
+    </form>
+  </section>
+  <app-sidebar></app-sidebar>
+</div>

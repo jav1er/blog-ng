@@ -1,0 +1,87 @@
+<app-slider [name]="'Bienvenido a formulario'"></app-slider>
+
+<div class="center">
+  <section id="content">
+    <form class="mid-form" [formGroup]="formGroup">
+      <label for="registeredOn">Registered On</label>
+      <input formControlName="registeredOn" type="date" />
+      <label for="name">Name</label>
+      <input formControlName="name" type="text" />
+      <span>{{ getError("name") }}</span>
+      <label for="email">E-mail</label>
+      <input formControlName="email" type="email" />
+      <span>{{ getError("email") }}</span>
+      <label for="password">Password</label>
+      <input formControlName="password" type="password" />
+      <!-- <span>{{ getError("password") }}</span> -->
+      <strong *ngIf="formGroup.get('password').errors?.validate$">
+        1(validando el $)
+      </strong>
+      <strong *ngIf="formGroup.get('password').errors?.validateNumber">
+        2(debe iniciar por un numero)
+      </strong>
+      <strong *ngIf="formGroup.get('password').errors?.minlength">
+        3(debe tener 4 caracteres)
+      </strong>
+      <strong *ngIf="formGroup.get('password').errors?.required">
+        4(debe ingresar un valor)
+      </strong>
+      <!-- <h6>{{formGroup.get('password').errors?.required}}</h6> -->
+    </form>
+
+    <button (click)="register()" [disabled]="formGroup.invalid">
+      Register me!
+    </button>
+  </section>
+  <app-sidebar></app-sidebar>
+</div>
+
+<!--
+<app-slider [name]="'Bienvenido a formulario'"></app-slider>
+
+<div class="center">
+  <section id="content">
+    <form class="mid-form" [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="registeredOn">Registered On</label>
+        <input formControlName="registeredOn" type="date" />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" type="text" />
+        <span>{{ getError("name") }}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input formControlName="email" type="email" />
+        <strong *ngIf="formGroup.get('email').errors?.required">
+          (El email no puede quedar vacío)
+        </strong>
+        <h2> {{  formGroup.controls['email'].errors | json}}</h2>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="password" type="password" />
+        <span>{{ getError("password") }}</span>
+
+        <h2> {{  formGroup.controls['password'].errors | json}}</h2>
+
+        <small
+          class="form-text text-muted"
+          *ngIf="formGroup.get('password').hasError('validatePassword')"
+          >no cumple con la regex!
+        </small>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <button (click)="register()" [disabled]="formGroup.invalid">
+        Register me!
+      </button>
+    </form>
+  </section>
+  <app-sidebar></app-sidebar>
+</div> -->

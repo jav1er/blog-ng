@@ -1,0 +1,54 @@
+<div class="center">
+  <section id="content">
+    <h1>Crear artículo</h1>
+    <form class="mid-form" [formGroup]="articleForm" (ngSubmit)="validate()">
+      <div class="form-group">
+        <label>Titulo</label>
+        <input formControlName="title" type="text" />
+        <small *ngIf=""> El nombre no es valido</small>
+      </div>
+
+      <div class="form-group">
+        <label>Contenido</label>
+        <textarea formControlName="content"></textarea>
+        <ol *ngIf="articleForm.get('content').errors">
+          <li *ngIf="articleForm.get('content').errors?.validateDollar">
+            (validando el $)
+          </li>
+          <li *ngIf="articleForm.get('content').errors?.validateNumber">
+            (debe iniciar por un numero)
+          </li>
+          <li *ngIf="articleForm.get('content').errors?.minlength">
+            (debe tener 4 caracteres)
+          </li>
+          <li *ngIf="articleForm.get('content').errors?.required">
+            (debe ingresar un valor)
+          </li>
+        </ol>
+      </div>
+
+      <div class="form-group">
+        <label>imagen</label>
+        <input formControlName="image" (change)="upLoad($event)" type="file" />
+      </div>
+
+      <div class="clearfix"></div>
+
+      <!-- <input
+        type="submit"
+        value="Enviar"
+        class="btn"
+        [ngClass]="articleForm.invalid ? 'btn-danger' : 'btn-success'"
+        [disabled]="articleForm.invalid"
+      /> -->
+
+      <input
+        (click)="createArticle()"
+        value="guardar"
+        class="btn"
+        [ngClass]="articleForm.invalid ? 'btn-danger' : 'btn-success'"
+      />
+    </form>
+  </section>
+  <app-sidebar></app-sidebar>
+</div>

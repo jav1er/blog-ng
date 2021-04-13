@@ -1,0 +1,22 @@
+<div class="loading" *ngIf="!propArrayArticles">Cargando...</div>
+<h2 *ngIf="propArrayArticles.length < 1">No se encontraron Artículos</h2>
+<div id="articles" *ngIf="propArrayArticles">
+  <article
+    class="article-item"
+    id="article-template"
+    *ngFor="let article of propArrayArticles"
+  >
+    <div class="image-wrap">
+      <img
+        src="{{
+          article.image ? urlImage + article.image : 'assets/images/damaged.png'
+        }}"
+        alt="{{ article.title }}"
+      />
+    </div>
+    <h2>{{ article.title }}</h2>
+    <span class="date"> {{ article.date | amLocale: "es" | amTimeAgo }} </span>
+    <a [routerLink]="['/detalleArticle', article._id]">Leer más</a>
+    <div class="clearfix"></div>
+  </article>
+</div>

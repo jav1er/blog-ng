@@ -1,0 +1,13 @@
+<app-slider [name]="'Bienvenido a peliculas'"></app-slider>
+
+<div class="center">
+  <section id="content">
+    <h2 *ngIf="movieSeleced">{{movieSeleced.title}}</h2>
+    <div id="articles" *ngIf="arrayMovies">
+      <div *ngFor="let movie of arrayMovies">
+        <app-movie [propMovie] = "movie" (selectFavorite)="showFavorite($event)"></app-movie>
+      </div>
+    </div>
+  </section>
+  <app-sidebar></app-sidebar>
+</div>
